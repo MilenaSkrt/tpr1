@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Определим функцию f(x)
 def f(x):
@@ -52,4 +53,42 @@ x0 = 0.75  # Выбираем начальное значение между 0.5
 minimum = newtons_method(x0)
 print(f"Минимум функции достигается в x = {minimum:.5f}, f(x) = {f(minimum):.5f}")
 
+# Построение графика
+x_values = np.linspace(0.5, 1.5, 400)
+f_values = f(x_values)
+f_prime_values = f_prime(x_values)
+f_double_prime_values = f_double_prime(x_values)
 
+plt.figure(figsize=(12, 8))
+
+# График функции
+plt.subplot(3, 1, 1)
+plt.plot(x_values, f_values, label='f(x)', color='blue')
+plt.scatter([minimum], [f(minimum)], color='red', label='Минимум')
+plt.title('График функции f(x)')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.axhline(0, color='black',linewidth=0.5, ls='--')
+plt.axvline(0, color='black',linewidth=0.5, ls='--')
+plt.legend()
+
+# График первой производной
+plt.subplot(3, 1, 2)
+plt.plot(x_values, f_prime_values, label="f'(x)", color='green')
+plt.axhline(0, color='black',linewidth=0.5, ls='--')
+plt.title('График первой производной f\'(x)')
+plt.xlabel('x')
+plt.ylabel('f\'(x)')
+plt.legend()
+
+# График второй производной
+plt.subplot(3, 1, 3)
+plt.plot(x_values, f_double_prime_values, label="f''(x)", color='orange')
+plt.axhline(0, color='black',linewidth=0.5, ls='--')
+plt.title('График второй производной f\'\'(x)')
+plt.xlabel('x')
+plt.ylabel('f\'\'(x)')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
